@@ -1,0 +1,41 @@
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+# Idea
+#
+.idea/*
+*.iml
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+*.code-workspace
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Bundle
+dist/
+build/
+
+
+package-lock.json
+# Jest reports
+coverage
+reports
+
+# prod env
+.env.prod

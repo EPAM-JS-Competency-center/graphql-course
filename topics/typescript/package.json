@@ -1,0 +1,28 @@
+{
+  "name": "gql-set-up",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "gen-types": "graphql-codegen --config codegen.yaml",
+    "dev": "nodemon 'src/server.ts' --exec 'ts-node' src/server.ts",
+    "start": "concurrently 'yarn run dev' 'yarn run gen-types --watch'"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.25.1",
+    "express": "^4.17.1",
+    "graphql": "^15.5.1",
+    "graphql-modules": "^1.4.3"
+  },
+  "devDependencies": {
+    "@graphql-codegen/add": "^2.0.2",
+    "@graphql-codegen/cli": "^1.21.6",
+    "@graphql-codegen/graphql-modules-preset": "^1.2.9",
+    "@graphql-codegen/typescript": "^1.22.4",
+    "@graphql-codegen/typescript-resolvers": "^1.19.5",
+    "concurrently": "^6.2.0",
+    "nodemon": "^2.0.9",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.5"
+  }
+}
