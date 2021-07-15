@@ -2,6 +2,7 @@
 GraphQL microlearning course resources
 
 
+
 ## Topics
 
 - [GraphQL Setup](./topics/gql-set-up/)
