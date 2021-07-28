@@ -7,3 +7,4 @@ GraphQL microlearning course resources
 
 - [GraphQL Setup](./topics/gql-set-up/)
 - [GraphQL TypeScript](./topics/typescript/)
+- [GraphQL Schema Types (part1)](./topics/schema-types/)
