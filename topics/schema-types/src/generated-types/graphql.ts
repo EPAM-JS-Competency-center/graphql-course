@@ -37,6 +37,13 @@ export type EnduranceStats = Stats & {
   durability: Scalars['Int'];
 };
 
+export type EnduranceStatsInput = {
+  intelligence: Scalars['Int'];
+  strength: Scalars['Int'];
+  speed: Scalars['Float'];
+  durability: Scalars['Int'];
+};
+
 export type Gender =
   | 'Male'
   | 'Female';
@@ -50,8 +57,41 @@ export type Hero = {
   appearance?: Maybe<Appearance>;
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  addHero: Scalars['Boolean'];
+  addHeroByPower: Scalars['Boolean'];
+  addHeroByEndurance: Scalars['Boolean'];
+};
+
+
+export type MutationAddHeroArgs = {
+  name: Scalars['String'];
+  endurance?: Maybe<EnduranceStatsInput>;
+  power?: Maybe<PowerStatsInput>;
+};
+
+
+export type MutationAddHeroByPowerArgs = {
+  name: Scalars['String'];
+  power: PowerStatsInput;
+};
+
+
+export type MutationAddHeroByEnduranceArgs = {
+  name: Scalars['String'];
+  endurance: EnduranceStatsInput;
+};
+
 export type PowerStats = Stats & {
   __typename?: 'PowerStats';
+  intelligence: Scalars['Int'];
+  strength: Scalars['Int'];
+  power: Scalars['Int'];
+  combat: Scalars['Int'];
+};
+
+export type PowerStatsInput = {
   intelligence: Scalars['Int'];
   strength: Scalars['Int'];
   power: Scalars['Int'];
@@ -163,14 +203,17 @@ export type ResolversTypes = {
   EnduranceStats: ResolverTypeWrapper<EnduranceStats>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
+  EnduranceStatsInput: EnduranceStatsInput;
   Gender: Gender;
   Hero: ResolverTypeWrapper<Omit<Hero, 'basestats'> & { basestats: ResolversTypes['BaseStats'] }>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
+  Mutation: ResolverTypeWrapper<{}>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   PowerStats: ResolverTypeWrapper<PowerStats>;
+  PowerStatsInput: PowerStatsInput;
   Query: ResolverTypeWrapper<{}>;
   Race: Race;
   Stats: ResolversTypes['EnduranceStats'] | ResolversTypes['PowerStats'];
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -182,12 +225,15 @@ export type ResolversParentTypes = {
   EnduranceStats: EnduranceStats;
   Int: Scalars['Int'];
   Float: Scalars['Float'];
+  EnduranceStatsInput: EnduranceStatsInput;
   Hero: Omit<Hero, 'basestats'> & { basestats: ResolversParentTypes['BaseStats'] };
   ID: Scalars['ID'];
+  Mutation: {};
+  Boolean: Scalars['Boolean'];
   PowerStats: PowerStats;
+  PowerStatsInput: PowerStatsInput;
   Query: {};
   Stats: ResolversParentTypes['EnduranceStats'] | ResolversParentTypes['PowerStats'];
-  Boolean: Scalars['Boolean'];
 };
 
 export type AppearanceResolvers<ContextType = any, ParentType extends ResolversParentTypes['Appearance'] = ResolversParentTypes['Appearance']> = {
@@ -223,6 +269,12 @@ export type HeroResolvers<ContextType = any, ParentType extends ResolversParentT
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  addHero?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAddHeroArgs, 'name'>>;
+  addHeroByPower?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAddHeroByPowerArgs, 'name' | 'power'>>;
+  addHeroByEndurance?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAddHeroByEnduranceArgs, 'name' | 'endurance'>>;
+};
+
 export type PowerStatsResolvers<ContextType = any, ParentType extends ResolversParentTypes['PowerStats'] = ResolversParentTypes['PowerStats']> = {
   intelligence?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   strength?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -248,6 +300,7 @@ export type Resolvers<ContextType = any> = {
   Biography?: BiographyResolvers<ContextType>;
   EnduranceStats?: EnduranceStatsResolvers<ContextType>;
   Hero?: HeroResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   PowerStats?: PowerStatsResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Stats?: StatsResolvers<ContextType>;

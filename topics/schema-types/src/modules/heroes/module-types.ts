@@ -9,12 +9,18 @@ export namespace HeroesModule {
     Biography: 'fullName' | 'placeOfBirth';
     PowerStats: 'intelligence' | 'strength' | 'power' | 'combat';
     EnduranceStats: 'intelligence' | 'strength' | 'speed' | 'durability';
+    Mutation: 'addHero' | 'addHeroByPower' | 'addHeroByEndurance';
     Stats: 'intelligence' | 'strength';
   };
   
   interface DefinedEnumValues {
     Gender: 'Male' | 'Female';
     Race: 'Human' | 'Animal';
+  };
+  
+  interface DefinedInputFields {
+    EnduranceStatsInput: 'intelligence' | 'strength' | 'speed' | 'durability';
+    PowerStatsInput: 'intelligence' | 'strength' | 'power' | 'combat';
   };
   
   export type Query = Pick<Types.Query, DefinedFields['Query']>;
@@ -27,6 +33,9 @@ export namespace HeroesModule {
   export type PowerStats = Pick<Types.PowerStats, DefinedFields['PowerStats']>;
   export type EnduranceStats = Pick<Types.EnduranceStats, DefinedFields['EnduranceStats']>;
   export type Stats = Pick<Types.Stats, DefinedFields['Stats']>;
+  export type Mutation = Pick<Types.Mutation, DefinedFields['Mutation']>;
+  export type EnduranceStatsInput = Pick<Types.EnduranceStatsInput, DefinedInputFields['EnduranceStatsInput']>;
+  export type PowerStatsInput = Pick<Types.PowerStatsInput, DefinedInputFields['PowerStatsInput']>;
   
   export type QueryResolvers = Pick<Types.QueryResolvers, DefinedFields['Query']>;
   export type HeroResolvers = Pick<Types.HeroResolvers, DefinedFields['Hero'] | '__isTypeOf'>;
@@ -34,6 +43,7 @@ export namespace HeroesModule {
   export type BiographyResolvers = Pick<Types.BiographyResolvers, DefinedFields['Biography'] | '__isTypeOf'>;
   export type PowerStatsResolvers = Pick<Types.PowerStatsResolvers, DefinedFields['PowerStats'] | '__isTypeOf'>;
   export type EnduranceStatsResolvers = Pick<Types.EnduranceStatsResolvers, DefinedFields['EnduranceStats'] | '__isTypeOf'>;
+  export type MutationResolvers = Pick<Types.MutationResolvers, DefinedFields['Mutation']>;
   export type StatsResolvers = Pick<Types.StatsResolvers, DefinedFields['Stats']>;
   
   export interface Resolvers {
@@ -43,6 +53,7 @@ export namespace HeroesModule {
     Biography?: BiographyResolvers;
     PowerStats?: PowerStatsResolvers;
     EnduranceStats?: EnduranceStatsResolvers;
+    Mutation?: MutationResolvers;
   };
   
   export interface MiddlewareMap {
@@ -84,6 +95,12 @@ export namespace HeroesModule {
       strength?: gm.Middleware[];
       speed?: gm.Middleware[];
       durability?: gm.Middleware[];
+    };
+    Mutation?: {
+      '*'?: gm.Middleware[];
+      addHero?: gm.Middleware[];
+      addHeroByPower?: gm.Middleware[];
+      addHeroByEndurance?: gm.Middleware[];
     };
   };
 }

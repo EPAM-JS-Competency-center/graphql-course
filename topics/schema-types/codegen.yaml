@@ -10,3 +10,5 @@ generates:
           content: '/* eslint-disable */'
       - typescript
       - typescript-resolvers
+require:
+  - "ts-node/register/transpile-only"

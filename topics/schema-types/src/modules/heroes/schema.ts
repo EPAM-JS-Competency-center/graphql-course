@@ -1,6 +1,7 @@
 import { gql } from 'apollo-server-express';
+import { sharedEndurance, sharedPower } from './shared-templates';
 
-export const typeDefs = gql`
+const template = `
   extend type Query {
     searchHero(name: String): [Hero!]!
   }
@@ -41,16 +42,26 @@ export const typeDefs = gql`
   }
   
   type PowerStats implements Stats {
-    intelligence: Int!
-    strength: Int!
-    power: Int!
-    combat: Int!
+    ${sharedPower}
   }
   
   type EnduranceStats implements Stats {
-    intelligence: Int!
-    strength: Int!
-    speed: Float!
-    durability: Int!
+    ${sharedEndurance}
+  }
+  
+  type Mutation {
+    addHero(name: String!, endurance: EnduranceStatsInput, power: PowerStatsInput): Boolean!
+    addHeroByPower(name: String!, power: PowerStatsInput!): Boolean!
+    addHeroByEndurance(name: String!, endurance: EnduranceStatsInput!): Boolean!
+  }
+  
+  input EnduranceStatsInput {
+    ${sharedEndurance}
+  }
+  
+  input PowerStatsInput {
+    ${sharedPower}
   }
 `
+
+export const typeDefs = gql(template)
