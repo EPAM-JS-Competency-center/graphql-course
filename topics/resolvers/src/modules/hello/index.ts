@@ -1,0 +1,1 @@
+export { helloModule } from './hello.module'
