@@ -10,3 +10,4 @@ GraphQL microlearning course resources
 - [GraphQL Schema Types (part1)](./topics/schema-types/)
 - [GraphQL Schema Types (part2)](./topics/schema-types/)
 - [GraphQL Mastering resolvers](./topics/resolvers/)
+- [GraphQL Data Sources (part 1)](./topics/data-sources/)
