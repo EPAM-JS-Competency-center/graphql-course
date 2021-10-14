@@ -1,0 +1,16 @@
+schema: "src/modules/*/schema.ts"
+generates:
+  ./src/modules/:
+    preset: graphql-modules
+    presetConfig:
+      baseTypesPath: ../generated-types/graphql.ts
+      filename: ./module-types.ts
+    plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - typescript
+      - typescript-resolvers
+    config:
+      contextType: ../context#Context
+require:
+  - "ts-node/register/transpile-only"

@@ -12,3 +12,4 @@ GraphQL microlearning course resources
 - [GraphQL Mastering resolvers](./topics/resolvers/)
 - [GraphQL Data Sources (part 1)](./topics/data-sources/)
 - [GraphQL Data Sources (part 2)](./topics/data-sources/)
+- [GraphQL Authentication](./topics/auth/)
