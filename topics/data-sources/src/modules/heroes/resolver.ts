@@ -1,5 +1,4 @@
 import { HeroesModule } from './module-types'
-import {getBiographyById } from './response';
 import camelcaseKeys from 'camelcase-keys';
 
 export const resolver: HeroesModule.Resolvers = {
@@ -15,9 +14,8 @@ export const resolver: HeroesModule.Resolvers = {
     }
   },
   Hero: {
-    biography: (parent, args, context, info) => {
-      // But what if the heroes are too much & they have duplicates? => duplicate requests => N + 1 problem
-      const biography = getBiographyById(parent.id)
+    biography: async (parent, args, { dataSources }, info) => {
+      const biography = await dataSources.HeroBiographies.getBiographyById(parent.id)
       return biography ? camelcaseKeys(biography) : null
     }
   },
